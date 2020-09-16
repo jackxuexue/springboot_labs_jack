@@ -1,0 +1,13 @@
+spring:
+  task:
+    execution:
+      thread-name-prefix: task-jack- #线程池的线程名前缀，默认为task-
+      pool:
+        core-size: 8 #核心线程数，线程池创建时候初始化的线程数。默认为8
+        max-size: 20 #最大线程数，线程池最大的线程数，只要在缓冲队列满了之后，才会自动创建新的。默认为Integer.MAX_VALUE
+        keep-alive: 60s #允许线程的空闲时间，当超过核心线程之外的线程，在空闲的时间达到才会被销毁。默认我60秒
+        queue-capacity: 200 #缓冲队列大小，用来缓冲执行任务的队列大小。默认为Integer.MAX_VALUE
+        allow-core-thread-timeout: true #是否允许核心线程超时，即开启线程池的动态增长和减小。默认为true
+      shutdown:
+        await-termination: true #应用关闭时，是否等待定时任务执行完成。默认为false，推荐打开
+        await-termination-period: 60 #等待任务完成的最大时长，单位为秒。默认为0，根据自己的应用来设置
