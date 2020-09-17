@@ -13,6 +13,9 @@
     <packaging>pom</packaging>
     <modules>
         <module>lab-rabbitmq01</module>
+        <module>lab-rabitmq02-cluster-broadcast</module>
+        <module>lab-rabbitmq03-concurrent</module>
+        <module>lab-rabbitmq04-orderly</module>
     </modules>
 
     <dependencies>

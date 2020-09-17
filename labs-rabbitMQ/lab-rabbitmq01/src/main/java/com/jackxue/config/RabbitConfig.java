@@ -1,10 +1,9 @@
 package com.jackxue.config;
 
 import com.jackxue.message.Demo01Message;
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.Queue;
+import com.jackxue.message.Demo02Message;
+import com.jackxue.message.Demo03Message;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -32,5 +31,52 @@ public class RabbitConfig {
         public Binding demo01Binding(){
             return BindingBuilder.bind(demo01Queue()).to(demo01Exchange()).with(Demo01Message.ROUTING_KEY);
         }
+    }
+
+    public static class TopicExchangeDemoConfiguration{
+        @Bean
+        public Queue demo02Queue(){
+            return new Queue(Demo02Message.QUEUE,
+                    true,
+                    false,
+                    false);
+        }
+        @Bean
+        public TopicExchange demo02Exchange(){
+            return new TopicExchange(Demo02Message.EXCHANGE, true, false);
+        }
+
+        @Bean
+        public Binding demo02Binding(){
+            return BindingBuilder.bind(demo02Queue()).to(demo02Exchange()).with(Demo02Message.ROUTING_KEY);
+        }
+    }
+
+    public static class FanoutExchangeDemoConfiguration{
+
+        @Bean
+        public Queue demo03QueueA(){
+            return new Queue(Demo03Message.QUEUE_A, true, false, false);
+        }
+
+        @Bean
+        public Queue demo03QueueB(){
+            return new Queue(Demo03Message.QUEUE_B, true, false, false);
+        }
+
+        @Bean
+        public FanoutExchange demo03Exchange(){
+            return new FanoutExchange(Demo03Message.EXCHANGE, true, false);
+        }
+
+        @Bean
+        public Binding demo03BindingA(){
+            return BindingBuilder.bind(demo03QueueA()).to(demo03Exchange());
+        }
+        @Bean
+        public Binding demo03BindingB(){
+            return BindingBuilder.bind(demo03QueueB()).to(demo03Exchange());
+        }
+
     }
 }

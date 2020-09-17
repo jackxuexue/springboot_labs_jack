@@ -6,6 +6,7 @@
     <modules>
         <module>labs-rabbitMQ</module>
         <module>lab-async</module>
+        <module>lab-image</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
